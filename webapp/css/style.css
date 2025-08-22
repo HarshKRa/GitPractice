@@ -1,0 +1,7 @@
+/* Enter your custom styles here */
+.card-style {
+  border: 1px solid #d3d3d3;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background-color: green;
+}

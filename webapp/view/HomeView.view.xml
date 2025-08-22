@@ -1,0 +1,40 @@
+<mvc:View controllerName="productdetails.controller.HomeView"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    
+    <ScrollContainer vertical="true" height="100%">
+        <FlexBox 
+            wrap="Wrap"
+            justifyContent="Center"
+            alignItems="Start"
+            gap="10px"
+            class="sapUiSmallMargin"
+            items="{ path : '/Products' }">
+
+            <items>
+                <VBox width="250px" 
+                    height="150px" 
+                    class="sapUiTinyMargin card-style" 
+                    backgroundDesign="Solid">
+                    
+                    <Panel 
+                        headerText="{ProductName}"
+                        class="sapUiTinyMargin"
+                        backgroundDesign="Solid"
+                        expandable="false">
+
+                        <VBox class="sapUiContentPadding" width="auto">
+                            <Text text="ID: {ProductID}" />
+                            <Text text="Price: {UnitPrice}" />
+                            <Text text="CategoryId: {CategoryID}" />
+                        </VBox>
+
+                    </Panel>
+
+                </VBox>
+            </items>
+        
+        </FlexBox>
+    </ScrollContainer>
+
+</mvc:View>
