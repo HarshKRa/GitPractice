@@ -1,4 +1,4 @@
-<mvc:View controllerName="productdetails.controller.HomeView"
+<mvc:View xmlns:core="sap.ui.core" controllerName="productdetails.controller.HomeView"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     
@@ -8,25 +8,48 @@
             justifyContent="Center"
             alignItems="Start"
             gap="10px"
-            class="sapUiSmallMargin"
+            class=""
             items="{ path : '/Products' }">
 
             <items>
                 <VBox width="250px" 
-                    height="150px" 
-                    class="sapUiTinyMargin card-style" 
+                    class="card-style" 
                     backgroundDesign="Solid">
                     
                     <Panel 
                         headerText="{ProductName}"
-                        class="sapUiTinyMargin"
+                        class="pannle-style"
+                        width="90%"
                         backgroundDesign="Solid"
                         expandable="false">
 
-                        <VBox class="sapUiContentPadding" width="auto">
+                        <VBox class="inside-card" width="auto">
+                            <Label text="sold count"  labelFor="inputSold"></Label>
+                            <Input id="inputSold" value="{ProductId}" placeholder="Enter Sold count.."/>
+
+                            <!-- <Label text="Comleted"  labelFor="checkBox"></Label> -->
+                            <CheckBox id="checkBox" selected="{Discontinued}" text="Mark As comleted"></CheckBox>
+
+                            <Switch state="false" customTextOn="done"></Switch>
                             <Text text="ID: {ProductID}" />
                             <Text text="Price: {UnitPrice}" />
                             <Text text="CategoryId: {CategoryID}" />
+                            <DatePicker displayFormat="dd/MM/yyyy"></DatePicker>
+
+                            <ComboBox placeholder="Reason">
+                                <items>
+                                    <core:Item text="less sold due to weather" />
+                                    <core:Item text="less sold due to less lockdown" />
+
+                                </items>
+                            </ComboBox>
+
+                            <Dialog title="confirm">
+                                <content>
+                                    <Text text="Are you sure?"></Text>
+                                </content>
+                            </Dialog>
+                            <Button text="submit"></Button>
                         </VBox>
 
                     </Panel>
