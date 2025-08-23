@@ -92,7 +92,7 @@
     "forecastedValue": 436,
     "actualShelf": "",
     "reasonNotOnShelf": "Late Delivery",
-    "completed": false,
+    "completed": true,
     "date": "2025-08-23"
   },
   {
@@ -128,7 +128,7 @@
     "forecastedValue": 464,
     "actualShelf": "",
     "reasonNotOnShelf": null,
-    "completed": false,
+    "completed": true,
     "date": "2025-08-23"
   },
   {
