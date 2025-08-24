@@ -1,12 +1,11 @@
 <mvc:View
-    xmlns:core="sap.ui.core"
-    controllerName="productdetails.controller.HomeView"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
->
-    <Page title="📦 Product Details" showHeader="true" navButtonPress=".onNavBack">
+    controllerName="productdetails.controller.HomeView">
 
-        <!-- Header buttons -->
+    <Page title="📦 Product Details" showHeader="true">
+
+        <!-- Header button to open dialog -->
         <headerContent>
             <Button 
                 icon="sap-icon://filter" 
@@ -14,69 +13,9 @@
                 press=".onOpenStoreDeptDialog" />
         </headerContent>
 
+        <!-- Placeholder for nested fragment -->
         <content>
-            <ScrollContainer vertical="true" height="100%">
-                <FlexBox
-                    id="productFlexBox"
-                    wrap="Wrap"
-                    justifyContent="Center"
-                    alignItems="Start"
-                    gap="10px"
-                    class="main-container"
-                    items="{ path : 'product>/Products' }"
-                >
-                    <items>
-                        <VBox width="350px">
-                            <customData>
-                                <core:CustomData
-                                    key="class"
-                                    value="{= ${product>completed} ? 'card-style' : 'card-style1'}"
-                                />
-                            </customData>
-                            <Panel class="pannle-style" width="90%" backgroundDesign="Solid" expandable="false">
-                                <headerToolbar>
-                                    <Toolbar>
-                                        <Title text="{product>productName}" />
-                                        <ToolbarSpacer />
-                                        <CheckBox selected="{product>completed}" />
-                                    </Toolbar>
-                                </headerToolbar>
-                                <VBox class="inside-card" width="auto">
-                                    <Label text="Sold Count" labelFor="inputSold" />
-                                    <Input id="inputSold" inputType="Number" value="{product>actualShelf}" placeholder="Enter Sold count.." />
-
-                                    <CheckBox id="checkBox" selected="{product>completed}" text="Mark As Completed" />
-
-                                    <Switch state="{product>completed}" customTextOn="Done" />
-
-                                    <Text text="Price: {product>forecastedValue}" />
-                                    <Text text="Store: {product>store}" />
-                                    <Text text="Department: {product>department}" />
-                                    <Text text="xyxvnign: {product>completed}" />
-
-                                    <DatePicker displayFormat="dd/MM/yyyy" value="{product>date}" />
-
-                                    <ComboBox selectedKey="{product>reasonNotOnShelf}" placeholder="Reason">
-                                        <items>
-                                            <core:Item key="Weather" text="Less sold due to weather" />
-                                            <core:Item key="Lockdown" text="Less sold due to lockdown" />
-                                        </items>
-                                    </ComboBox>
-
-                                    <Button text="Submit" press=".onSubmit" />
-                                </VBox>
-                            </Panel>
-                        </VBox>
-                    </items>
-                </FlexBox>
-            </ScrollContainer>
+            <VBox id="nestedCardContainer" class="main-container" />
         </content>
-
-        <!-- Dialog moved outside -->
-        <Dialog id="confirmDialog" title="Confirm">
-            <content>
-                <Text text="Are you sure?" />
-            </content>
-        </Dialog>
     </Page>
 </mvc:View>
