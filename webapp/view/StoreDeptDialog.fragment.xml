@@ -1,0 +1,34 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    
+    <Dialog
+        
+        title="Select Store and Department"
+        id="storeDeptDialog">
+        
+        <content class="dialog-box">
+            <Label text="Store"/>
+            <ComboBox
+                id="storeSelect"
+                items="{dropdowns>/stores}">
+                <core:Item key="{dropdowns>}" text="{dropdowns>}"/>
+            </ComboBox>
+
+            <Label text="Department"/>
+            <ComboBox
+                id="deptSelect"
+                items="{dropdowns>/departments}">
+                <core:Item key="{dropdowns>}" text="{dropdowns>}"/>
+            </ComboBox>
+        </content>
+
+        <beginButton>
+            <Button text="OK" press=".onDialogOk"/>
+        </beginButton>
+        <endButton>
+            <Button text="Cancel" press=".onDialogCancel"/>
+        </endButton>
+    </Dialog>
+
+</core:FragmentDefinition>

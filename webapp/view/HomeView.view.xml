@@ -5,6 +5,15 @@
     xmlns="sap.m"
 >
     <Page title="📦 Product Details" showHeader="true" navButtonPress=".onNavBack">
+
+        <!-- Header buttons -->
+        <headerContent>
+            <Button 
+                icon="sap-icon://filter" 
+                text="Filter Store/Dept" 
+                press=".onOpenStoreDeptDialog" />
+        </headerContent>
+
         <content>
             <ScrollContainer vertical="true" height="100%">
                 <FlexBox

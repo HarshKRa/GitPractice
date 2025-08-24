@@ -27,3 +27,8 @@
   margin: auto;
   padding: 10px 0px;
 }
+
+.dialog-box{
+  width: 50%;
+  display: flex;
+}
