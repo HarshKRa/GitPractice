@@ -23,7 +23,7 @@
                     </headerToolbar>
                     <VBox class="inside-card" width="auto">
                         <Label text="Sold Count" labelFor="inputSold" />
-                        <Input id="inputSold" inputType="Number" value="{filteredProducts>actualShelf}" placeholder="Enter Sold count.." />
+                        <Input id="inputSold" value="{filteredProducts>actualShelf}" placeholder="Enter Sold count.." />
 
                         <CheckBox id="checkBox" selected="{filteredProducts>completed}" text="Mark As Completed" />
 

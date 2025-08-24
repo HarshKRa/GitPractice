@@ -59,27 +59,29 @@ sap.ui.define([
 
         _showNestedFragment: function () {
             var oContainer = this.byId("nestedCardContainer");
-            oContainer.removeAllItems();
 
-            Fragment.load({
-                id: this.getView().getId(),
-                name: "productdetails.view.NestedView",
-                controller: this
-            }).then(oFragment => {
-                oContainer.addItem(oFragment);
+            if (!this._oNestedFragment) {
+                Fragment.load({
+                    id: this.getView().getId(),
+                    name: "productdetails.view.NestedView",
+                    controller: this
+                }).then(oFragment => {
+                    this._oNestedFragment = oFragment;
+                    oContainer.addItem(oFragment);
 
-                // Apply card color dynamically
-                var aItems = oFragment.getItems();
-                aItems.forEach(oVBox => {
-                    var aCustomData = oVBox.getCustomData();
-                    var oClassData = aCustomData.find(c => c.getKey() === "class");
-                    if (oClassData) {
-                        var sClass = oClassData.getValue();
-                        oVBox.removeStyleClass("card-style card-style1");
-                        oVBox.addStyleClass(sClass);
-                    }
+                    // Apply card color dynamically
+                    var aItems = oFragment.getItems();
+                    aItems.forEach(oVBox => {
+                        var aCustomData = oVBox.getCustomData();
+                        var oClassData = aCustomData.find(c => c.getKey() === "class");
+                        if (oClassData) {
+                            var sClass = oClassData.getValue();
+                            oVBox.removeStyleClass("card-style card-style1");
+                            oVBox.addStyleClass(sClass);
+                        }
+                    });
                 });
-            });
+            }
         },
 
         onDialogCancel: function () {
