@@ -23,6 +23,11 @@ sap.ui.define([
             this.getView().setModel(new JSONModel({ stores: stores, departments: depts }), "dropdowns");
         },
 
+        _deriveSectiondata : function(aProducts){
+            var sections = [... new Set(aProducts.map(p=> p.section))];
+            this.getView().setModel(new JSONModel({sections : sections}), "sectionData");
+        },
+
         onOpenStoreDeptDialog: function () {
             this._openStoreDeptDialog();
         },
@@ -51,6 +56,9 @@ sap.ui.define([
             var filtered = allProducts.filter(p => p.store === store && p.department === dept);
 
             this.getView().setModel(new JSONModel({ products: filtered }), "filteredProducts");
+
+            var oFilteredModel = this.getView().getModel("filteredProducts");
+            this._deriveSectiondata(oFilteredModel.getData().products);
 
             this._oDialog.close();
 

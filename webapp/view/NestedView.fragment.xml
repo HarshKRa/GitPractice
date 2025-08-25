@@ -11,7 +11,7 @@
         items="{filteredProducts>/products}"
     >
         <items>
-            <VBox width="350px">
+            <VBox width="450px">
                 <customData>
                     <core:CustomData
                         key="completed"
@@ -46,24 +46,16 @@
                             value="{filteredProducts>actualShelf}"
                             placeholder="Enter Sold count.."
                         />
-
-                        <CheckBox
-                            id="checkBox"
-                            selected="{filteredProducts>completed}"
-                            text="Mark As Completed"
-                        />
-
-                        <Switch
-                            state="{filteredProducts>completed}"
-                            customTextOn="Done"
-                        />
-
                         <Text
                             text="Price: {filteredProducts>forecastedValue}"
                         />
                         <Text text="Store: {filteredProducts>store}" />
                         <Text
                             text="Department: {filteredProducts>department}"
+                        />
+
+                        <Text
+                            text="Department: {filteredProducts>section}"
                         />
 
                         <DatePicker

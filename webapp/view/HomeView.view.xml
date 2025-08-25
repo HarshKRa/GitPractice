@@ -1,21 +1,45 @@
 <mvc:View
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m"
-    controllerName="productdetails.controller.HomeView">
-
-    <Page title="📦 Product Details" showHeader="true">
-
+    controllerName="productdetails.controller.HomeView"
+>
+    <Page
+        title="{i18n>productDetailsTitle}"
+        showHeader="true"
+    >
         <!-- Header button to open dialog -->
         <headerContent>
-            <Button 
-                icon="sap-icon://filter" 
-                text="Filter Store/Dept" 
-                press=".onOpenStoreDeptDialog" />
+            <Button
+                icon="sap-icon://filter"
+                text="{i18n>filterStoreDept}"
+                press=".onOpenStoreDeptDialog"
+                ariaLabel="Filter products by store and department"
+            />
         </headerContent>
+
+        <!-- Horizontal section before nested fragment -->
+        <HBox
+            id="sectionBar"
+            justifyContent="Start"
+            items="{sectionData>/sections}"
+            class="section-container"
+        >
+            <items>
+                <VBox
+                    press=".onSectionPress"
+                    class="clickable-section"
+                >
+                    <Text text="{sectionData>}" />
+                </VBox>
+            </items>
+        </HBox>
 
         <!-- Placeholder for nested fragment -->
         <content>
-            <VBox id="nestedCardContainer" class="main-container" />
+            <VBox
+                id="nestedCardContainer"
+                class="main-container"
+            />
         </content>
     </Page>
 </mvc:View>
