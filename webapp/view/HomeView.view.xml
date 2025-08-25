@@ -13,7 +13,6 @@
                 icon="sap-icon://filter"
                 text="{i18n>filterStoreDept}"
                 press=".onOpenStoreDeptDialog"
-                ariaLabel="Filter products by store and department"
             />
         </headerContent>
 
@@ -25,11 +24,13 @@
             class="section-container"
         >
             <items>
-                <VBox
-                    press=".onSectionPress"
-                    class="clickable-section"
-                >
-                    <Text text="{sectionData>}" />
+                <VBox class="clickable-section">
+                    <Button
+                        type="Transparent"
+                        text="{sectionData>}"
+                        press=".onSectionPress"
+                        class="section-button"
+                    />
                 </VBox>
             </items>
         </HBox>

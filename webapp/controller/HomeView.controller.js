@@ -9,6 +9,12 @@ sap.ui.define([
     return Controller.extend("productdetails.controller.HomeView", {
         formatter: formatter,
         onInit() {
+
+            this._store = null;
+            this._dept = null;
+            this._section = null;
+            this._filtered = [];
+
             var oModel = this.getOwnerComponent().getModel("product");
             this.__deriveDropDownData(oModel.getData().Products);
 
@@ -21,11 +27,6 @@ sap.ui.define([
             var depts = [... new Set(aProducts.map(p => p.department))];
 
             this.getView().setModel(new JSONModel({ stores: stores, departments: depts }), "dropdowns");
-        },
-
-        _deriveSectiondata : function(aProducts){
-            var sections = [... new Set(aProducts.map(p=> p.section))];
-            this.getView().setModel(new JSONModel({sections : sections}), "sectionData");
         },
 
         onOpenStoreDeptDialog: function () {
@@ -48,22 +49,31 @@ sap.ui.define([
             }
         },
 
+        _deriveSectiondata: function (aProducts) {
+            var sections = [... new Set(aProducts.map(p => p.section))];
+            if(sections.length != 0){
+                this._section = sections[0];
+            }
+            this.getView().setModel(new JSONModel({ sections: sections }), "sectionData");
+        },
+
         onDialogOk: function () {
             var store = sap.ui.getCore().byId(this.getView().getId() + "--storeSelect").getSelectedItem().getText();
             var dept = sap.ui.getCore().byId(this.getView().getId() + "--deptSelect").getSelectedItem().getText();
 
             var allProducts = this.getOwnerComponent().getModel("product").getData().Products;
-            var filtered = allProducts.filter(p => p.store === store && p.department === dept);
+            this._filtered = allProducts.filter(p => p.store === store && p.department === dept);
 
-            this.getView().setModel(new JSONModel({ products: filtered }), "filteredProducts");
-
-            var oFilteredModel = this.getView().getModel("filteredProducts");
-            this._deriveSectiondata(oFilteredModel.getData().products);
-
+            this._deriveSectiondata(this._filtered);
+            this._filteredProduct(this._section,this._filtered);
             this._oDialog.close();
 
             // Render nested fragment with filtered data
             this._showNestedFragment();
+        },
+        _filteredProduct(sec,arr){
+            var filtered = arr.filter(p => p.section === sec);
+            this.getView().setModel(new JSONModel({ products: filtered }), "filteredProducts");
         },
 
         _showNestedFragment: function () {
@@ -105,6 +115,15 @@ sap.ui.define([
 
         onSubmit: function () {
             sap.m.MessageToast.show("Submit pressed!");
+        },
+        onSectionPress(oEvent) {
+            // Get the button control that was pressed
+            var oButton = oEvent.getSource();
+
+            // Get the text of that button
+            var sText = oButton.getText();
+
+            this._filteredProduct(sText,this._filtered);
         }
 
     });
