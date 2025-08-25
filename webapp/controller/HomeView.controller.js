@@ -1,12 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
-], (Controller, JSONModel, Fragment) => {
+    "sap/ui/core/Fragment",
+    "productdetails/util/formatter"
+], (Controller, JSONModel, Fragment, formatter) => {
     "use strict";
 
     return Controller.extend("productdetails.controller.HomeView", {
-
+        formatter: formatter,
         onInit() {
             var oModel = this.getOwnerComponent().getModel("product");
             this.__deriveDropDownData(oModel.getData().Products);
@@ -69,15 +70,21 @@ sap.ui.define([
                     this._oNestedFragment = oFragment;
                     oContainer.addItem(oFragment);
 
-                    // Apply card color dynamically
-                    var aItems = oFragment.getItems();
-                    aItems.forEach(oVBox => {
-                        var aCustomData = oVBox.getCustomData();
-                        var oClassData = aCustomData.find(c => c.getKey() === "class");
-                        if (oClassData) {
-                            var sClass = oClassData.getValue();
-                            oVBox.removeStyleClass("card-style card-style1");
-                            oVBox.addStyleClass(sClass);
+                    // 🔑 Add delegate so this logic runs after every render
+                    var oFlexBox = this.byId("productFlexBox");
+                    oFlexBox.addDelegate({
+                        onAfterRendering: () => {
+                            var aItems = oFlexBox.getItems();
+                            aItems.forEach(oVBox => {
+                                var oCompletedData = oVBox.getCustomData().find(c => c.getKey() === "completed");
+                                if (oCompletedData) {
+                                    var bCompleted = oCompletedData.getValue();
+                                    var sClass = this.formatter.cardClass(bCompleted);
+
+                                    oVBox.removeStyleClass("card-style card-style1");
+                                    oVBox.addStyleClass(sClass);
+                                }
+                            });
                         }
                     });
                 });

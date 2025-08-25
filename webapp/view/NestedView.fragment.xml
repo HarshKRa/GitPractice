@@ -1,19 +1,31 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
     <FlexBox
         id="productFlexBox"
         wrap="Wrap"
         justifyContent="Center"
         alignItems="Start"
         gap="10px"
-        items="{filteredProducts>/products}">
+        items="{filteredProducts>/products}"
+    >
         <items>
             <VBox width="350px">
                 <customData>
                     <core:CustomData
-                        key="class"
-                        value="{= ${filteredProducts>completed} ? 'card-style' : 'card-style1'}" />
+                        key="completed"
+                        value="{filteredProducts>completed}"
+                        writeToDom="false"
+                    />
                 </customData>
-                <Panel class="pannle-style" width="90%" backgroundDesign="Solid" expandable="false">
+
+                <Panel
+                    class="pannle-style"
+                    width="90%"
+                    backgroundDesign="Solid"
+                    expandable="false"
+                >
                     <headerToolbar>
                         <Toolbar>
                             <Title text="{filteredProducts>productName}" />
@@ -21,28 +33,64 @@
                             <CheckBox selected="{filteredProducts>completed}" />
                         </Toolbar>
                     </headerToolbar>
-                    <VBox class="inside-card" width="auto">
-                        <Label text="Sold Count" labelFor="inputSold" />
-                        <Input id="inputSold" value="{filteredProducts>actualShelf}" placeholder="Enter Sold count.." />
+                    <VBox
+                        class="inside-card"
+                        width="auto"
+                    >
+                        <Label
+                            text="Sold Count"
+                            labelFor="inputSold"
+                        />
+                        <Input
+                            id="inputSold"
+                            value="{filteredProducts>actualShelf}"
+                            placeholder="Enter Sold count.."
+                        />
 
-                        <CheckBox id="checkBox" selected="{filteredProducts>completed}" text="Mark As Completed" />
+                        <CheckBox
+                            id="checkBox"
+                            selected="{filteredProducts>completed}"
+                            text="Mark As Completed"
+                        />
 
-                        <Switch state="{filteredProducts>completed}" customTextOn="Done" />
+                        <Switch
+                            state="{filteredProducts>completed}"
+                            customTextOn="Done"
+                        />
 
-                        <Text text="Price: {filteredProducts>forecastedValue}" />
+                        <Text
+                            text="Price: {filteredProducts>forecastedValue}"
+                        />
                         <Text text="Store: {filteredProducts>store}" />
-                        <Text text="Department: {filteredProducts>department}" />
+                        <Text
+                            text="Department: {filteredProducts>department}"
+                        />
 
-                        <DatePicker displayFormat="dd/MM/yyyy" value="{filteredProducts>date}" />
+                        <DatePicker
+                            displayFormat="dd/MM/yyyy"
+                            value="{filteredProducts>date}"
+                        />
 
-                        <ComboBox selectedKey="{filteredProducts>reasonNotOnShelf}" placeholder="Reason">
+                        <ComboBox
+                            selectedKey="{filteredProducts>reasonNotOnShelf}"
+                            placeholder="Reason"
+                        >
                             <items>
-                                <core:Item key="Weather" text="Less sold due to weather" />
-                                <core:Item key="Lockdown" text="Less sold due to lockdown" />
+                                <core:Item
+                                    key="Weather"
+                                    text="Less sold due to weather"
+                                />
+                                <core:Item
+                                    key="Lockdown"
+                                    text="Less sold due to lockdown"
+                                />
                             </items>
                         </ComboBox>
 
-                        <Button text="Submit" press=".onSubmit" />
+                        <Button
+                            text="Submit"
+                            press=".onSubmit"
+                        />
                     </VBox>
                 </Panel>
             </VBox>

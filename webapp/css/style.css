@@ -4,19 +4,17 @@
 }
 
 .card-style {
-  border: 1px solid #d3d3d3;
+  background-color: #d4edda; /* greenish */
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  background-color: green;
-  margin: 10px 10px;
+  margin: 10px;
+  padding: 10px;
 }
 
 .card-style1 {
-  border: 1px solid #d3d3d3;
+  background-color: #f8d7da; /* reddish */
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  background-color: rgb(235, 153, 153);
-  margin: 10px 10px;
+  margin: 10px;
+  padding: 10px;
 }
 
 .inside-card{
